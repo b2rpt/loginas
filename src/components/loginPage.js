@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
         width: '150vh'
     },
     image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundImage: 'url(https://source.unsplash.com/1600x900/?cook)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -85,16 +85,38 @@ export default function SignInSide() {
         return "password error text"
     }
 
-    const handleFacebookLogin = () =>{
+    const handleFacebookLogin = () => {
         console.log('facebook clicked')
     }
+
+    const handleGmailLogin = () => {
+        console.log('facebook clicked')
+    }
+
+    const handleTwitterLogin = () => {
+        console.log('facebook clicked')
+    }
+
+    const handleInstagramLogin = () => {
+        console.log('facebook clicked')
+    }
+
+    const handleGithubLogin = () => {
+        console.log('facebook clicked')
+    }
+
+    const handleLinkedInLogin = () => {
+        console.log('facebook clicked')
+    }
+
+
 
     return (
         <>
             <Card>
-                <Grid container component="main" className={classes.root}>
+                <Grid container component="main">
                     <CssBaseline />
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.root}>
                         <div className={classes.paper}>
                             {/* <Avatar className={classes.avatar}>
                                 {/* <LockOutlinedIcon /> */}
@@ -102,7 +124,7 @@ export default function SignInSide() {
                             <Typography component="h1" variant="subtitle2">
                                 WELCOME TO
                             </Typography>
-                            <Typography component="h2" variant="h7" style={{ color: "tomato" }}>
+                            <Typography component="h2" variant="h4" style={{ color: "tomato" }}>
                                 maidIN
                             </Typography>
                             <Typography component="h3" variant="subtitle2">
@@ -171,19 +193,30 @@ export default function SignInSide() {
                                         <div>
                                             <Divider variant="middle" />
                                         </div>
-                                        <Typography component="h1" variant="subtitle2">
+                                        <Typography component="h1" variant="subtitle2" style={{ marginTop: '40px' }}>
                                             Continue with social media
                                         </Typography>
                                         <div >
                                             <IconButton aria-label="delete" onClick={() => handleFacebookLogin()}>
                                                 <FacebookIcon />
                                             </IconButton>
+                                            <IconButton aria-label="delete" onClick={() => handleTwitterLogin()}>
+                                                <TwitterIcon />
+                                            </IconButton>
+                                            <IconButton aria-label="delete" onClick={() => handleGmailLogin()}>
+                                                <MailIcon />
+                                            </IconButton>
 
-                                            <TwitterIcon />
-                                            <MailIcon />
-                                            <LinkedInIcon />
-                                            <GitHubIcon />
-                                            <InstagramIcon />
+                                            <IconButton aria-label="delete" onClick={() => handleLinkedInLogin()}>
+                                                <LinkedInIcon />
+                                            </IconButton>
+
+                                            <IconButton aria-label="delete" onClick={() => handleGithubLogin()}>
+                                                <GitHubIcon />
+                                            </IconButton>
+                                            <IconButton aria-label="delete" onClick={() => handleInstagramLogin()}>
+                                                <InstagramIcon />
+                                            </IconButton>
                                         </div>
                                     </Grid>
                                 </Grid>

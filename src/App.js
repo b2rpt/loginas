@@ -1,6 +1,6 @@
 import './App.css';
 
-import MediaControlCard from './componets/loginPage'
+import MediaControlCard from './components/loginPage'
 
 function App() {
   return (
