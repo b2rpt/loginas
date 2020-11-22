@@ -1,10 +1,8 @@
 import React from 'react';
 // import Avatar from '@material-ui/core/Avatar';
+import { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -18,11 +16,13 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import { IconButton } from '@material-ui/core';
-
-
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { validateLogin } from '../../services/login';
+
+import {Controls} from '../controls/controls'
 
 function Copyright() {
     return (
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%', // Fix IE 11 issue.  
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -70,8 +70,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignInSide() {
+export default function LogInForm() {
     const classes = useStyles();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleEmailError = () => {
         return false
@@ -109,13 +111,30 @@ export default function SignInSide() {
         console.log('facebook clicked')
     }
 
+    const handleEmailInput = (e) => {
+        console.log(e.target)
+        setEmail(e.target.value)
+    }
+
+    const handlePasswordInput = (e) => {
+        console.log(e.target.value)
+        setPassword(e.target.value)
+    }
+
+    const handleSubmit = () => {
+        
+        // console.log('-------------submitted')
+        validateLogin(email, password)
+            .then(data => console.log(data));
+        // window.alert('hi')
+    }
+
 
 
     return (
         <>
             <Card>
                 <Grid container component="main">
-                    <CssBaseline />
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.root}>
                         <div className={classes.paper}>
                             {/* <Avatar className={classes.avatar}>
@@ -130,7 +149,7 @@ export default function SignInSide() {
                             <Typography component="h3" variant="subtitle2">
                                 login to get maid around your location
                             </Typography>
-                            <form className={classes.form} noValidate>
+                            <form className={classes.form} onSubmit={handleSubmit} noValidate>
                                 <TextField
                                     error={handleEmailError()}
                                     size="small"
@@ -144,6 +163,8 @@ export default function SignInSide() {
                                     autoComplete="email"
                                     autoFocus
                                     helperText={handleEmailErrorText()}
+                                    value={email}
+                                    onChange={(e) => handleEmailInput(e)}
                                 />
                                 <TextField
                                     error={handleEmailError()}
@@ -157,8 +178,9 @@ export default function SignInSide() {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                    helperText="Incorrect entry."
                                     helperText={handlePasswordErrorText()}
+                                    value={password}
+                                    onChange={(e) => handlePasswordInput(e)}
                                 />
                                 {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
@@ -170,6 +192,8 @@ export default function SignInSide() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
+                                    label='Sign In'
+                                    
                                 >
                                     Sign In
                                 </Button>
