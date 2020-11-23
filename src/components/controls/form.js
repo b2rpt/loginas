@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyle = makeStyles(theme => ({
     root: {
         '& .MuiFormControl-root ': {
-            marginTop: theme.spacing(4),
+            marginTop: theme.spacing(2),
             width: '100%',
         },
     },

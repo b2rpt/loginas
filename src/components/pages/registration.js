@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { Card, Grid, makeStyles, Link, Typography } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 import useForm from '../../hooks/useForm';
-import { Controls } from '../../components/controls/controls'
+import { Controls } from '../../components/controls/controls';
+
 
 const useStyle = makeStyles(theme => ({
     root: {
@@ -120,9 +122,11 @@ export default function RegistrationForm() {
                             </Controls.Form>
                         </div>
                         <div>
-                            <Link href="#" variant="body2">
+                            <Typography variant="body2">
+                                <RouterLink to='/signin'>
                                 Already have an account? Sign In
-                            </Link>
+                                </RouterLink>
+                            </Typography>
                         </div>
                     </Grid>
                 </Grid>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';    
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -22,7 +22,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { validateLogin } from '../../services/login';
 
-import {Controls} from '../controls/controls'
+import { Controls } from '../controls/controls';
+import { Link as RouterLink } from 'react-router-dom';
+
+import RegistrationPage from './registration';
 
 function Copyright() {
     return (
@@ -122,7 +125,7 @@ export default function LogInForm() {
     }
 
     const handleSubmit = () => {
-        
+
         // console.log('-------------submitted')
         validateLogin(email, password)
             .then(data => console.log(data));
@@ -193,22 +196,25 @@ export default function LogInForm() {
                                     color="primary"
                                     className={classes.submit}
                                     label='Sign In'
-                                    
+
                                 >
                                     Sign In
                                 </Button>
+
                                 <Grid container>
                                     <Grid item xs>
-                                        <Link href="#" variant="body2">
-                                            Forgot password?
-                                        </Link>
+                                        <Typography variant="body2">
+                                            <RouterLink to='/forgotpassword'>
+                                                Forgot password?
+                                            </RouterLink>
+                                        </Typography>
                                     </Grid>
                                     <Grid item>
-                                        {/* <p>Don't have account? */}
-                                        <Link href="#" variant="body2">
-                                            {" Don't have account? Sign Up"}
-                                        </Link>
-                                        {/* </p> */}
+                                        <Typography variant="body2">
+                                            <RouterLink to='/signup'>
+                                                " Don't have account? Sign Up"
+                                            </RouterLink>
+                                        </Typography>
                                     </Grid>
                                 </Grid>
 
