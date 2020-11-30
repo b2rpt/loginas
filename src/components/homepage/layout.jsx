@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 
 import CookList from './cookList';
 import Location from './location';
-import UserForm from './userForm';
 import AppBar from './aapBar';
 import { Button } from '@material-ui/core';
 
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const handleAddCook = () => {
-    return (<UserForm />)
+    return (null)
 }
 
 export default function AutoGrid() {
@@ -41,7 +40,6 @@ export default function AutoGrid() {
                     <Grid item xs={9}>
                         <CookList />
                         <Button onClick={handleAddCook}> add cook</Button>
-                        <UserForm />
                     </Grid>
                 </Grid>
 
