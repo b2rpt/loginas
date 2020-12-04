@@ -11,18 +11,17 @@ const useStyle = makeStyles((theme) => ({
 
 export default function Input(props) {
   const classes = useStyle();
-  const {  size, color, variant, type, label, fullWidth, onClick } = props;
+  const { size, color, variant, type, label, fullWidth, onClick } = props;
   return (
     <Button
       className={classes.root}
       color={color || "primary"}
       fullWidth={fullWidth || false}
-      size={size || "default"}
+      size={size || "large"}
       variant={variant || "contained"}
       onClick={onclick}
       type={type || "submit"}
       label={label}
-      
     >
       {label}
     </Button>

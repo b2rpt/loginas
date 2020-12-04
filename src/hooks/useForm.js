@@ -13,7 +13,7 @@ export default function useForm(initialValues) {
     }
 
     return (
-        { values, setValues, handleChange }
+        { values, handleChange }
     )
 }
 

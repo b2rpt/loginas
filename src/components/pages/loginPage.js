@@ -67,17 +67,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialValues = {
-//   id: 0,
   email: "",
   password: "",
-  //   fullName: "",
-//   confirmPassword: "",
-//   mobile: "",
-//   city: "",
-//   gender: "male",
-//   hiredate: new Date(),
-//   specialist: "",
-//   experience: "",
 };
 
 export default function LogInForm() {
@@ -109,10 +100,11 @@ export default function LogInForm() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // console.log('-------------submitted')
-    validateLogin(email, password).then((data) => console.log(data));
-    // window.alert('hi')
+    // validateLogin(email, password).then((data) => console.log(data));
+    window.alert('hi')
   };
 
   return (
@@ -132,7 +124,7 @@ export default function LogInForm() {
             <div className={classes.paper}>
               <HeaderNlogo />
 
-              <Controls.Form>
+              <Controls.Form onSubmit={(e)=>handleSubmit(e)} >
                 <Controls.Input
                   type="email"
                   value={values.email}
