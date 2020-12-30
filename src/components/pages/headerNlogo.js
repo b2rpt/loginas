@@ -25,7 +25,11 @@ export default function HeaderNlogo() {
         WELCOME TO
       </Typography>
 
-      <Typography component="h2" variant="h4" style={{ color: "tomato" }}>
+      <Typography
+        component="h2"
+        variant="h4"
+        style={{ color: "#FFCA3D", fontFamily: "Montserrat" }}
+      >
         maidIN
       </Typography>
 

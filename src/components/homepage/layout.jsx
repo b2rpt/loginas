@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     divider: {
         marginLeft: '10px',
-        marginRight: '10px'
+        marginRight: '10px',
     }
 }));
 
@@ -39,7 +39,6 @@ export default function AutoGrid() {
                     <Divider orientation="vertical" className={classes.divider} />
                     <Grid item xs={9}>
                         <CookList />
-                        <Button onClick={handleAddCook}> add cook</Button>
                     </Grid>
                 </Grid>
 

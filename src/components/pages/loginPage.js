@@ -7,13 +7,14 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import { IconButton } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route, useHistory } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import homePage from "../../components/homepage/layout";
+import "../../App.css";
 
 import { validateLogin } from "../../services/login";
 
-// import RegistrationPage from "./registration";
 import useSocialLogin from "../../hooks/useSocialLogin";
 import useForm from "../../hooks/useForm";
 import { Controls } from "../../components/controls/controls";
@@ -33,7 +34,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "80vh",
+    Height: "80vh",
     width: "150vh",
   },
   image: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
         : theme.palette.grey[900],
     backgroundSize: "cover",
     backgroundPosition: "center",
+    opacity: ".5",
   },
   paper: {
     // margin: theme.spacing(5, 2),
@@ -53,17 +55,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    // marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+ 
+ 
+  // submit: {
+  //   margin: theme.spacing(3, 0, 2),
+  // },
 }));
 
 const initialValues = {
@@ -77,40 +73,24 @@ export default function LogInForm() {
   const [password, setPassword] = useState("");
   const { values, handleChange } = useForm(initialValues);
   const { icon, handleLoginClick } = useSocialLogin("");
-
-  const handleEmailError = () => {
-    return false;
-  };
-
-  const handleEmailErrorText = () => {
-    return "email error text";
-  };
-
-  const handlePasswordErrorText = () => {
-    return "password error text";
-  };
-
-  const handleEmailInput = (e) => {
-    console.log(e.target);
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordInput = (e) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
-  };
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log('-------------submitted')
-    // validateLogin(email, password).then((data) => console.log(data));
-    window.alert('hi')
+    validateLogin(values.email, values.password).then((data) => {
+      console.log("loginpage", data);
+      if (data.status === 200) {
+        // return <Route path="/home" exact component={homePage} />;
+        history.push("/home");
+      }
+    });
+    // window.alert('hi')
   };
 
   return (
-    <>
+    <div className="App-headerforPages">
       <Card>
-        <Grid container component="main">
+        <Grid container component="main" style={{ backgroundColor: "#020C53" }}>
           <Grid
             item
             xs={12}
@@ -124,7 +104,7 @@ export default function LogInForm() {
             <div className={classes.paper}>
               <HeaderNlogo />
 
-              <Controls.Form onSubmit={(e)=>handleSubmit(e)} >
+              <Controls.Form onSubmit={handleSubmit}>
                 <Controls.Input
                   type="email"
                   value={values.email}
@@ -170,11 +150,11 @@ export default function LogInForm() {
 
                 <Grid container display={"flex"}>
                   <Grid item xs>
-                    <Divider variant="middle" style={{ marginTop: "60px" }} />
+                    <Divider variant="middle" style={{ marginTop: "20px" }} />
                   </Grid>
-                  <Typography style={{ marginTop: "50px" }}>Or</Typography>
+                  <Typography style={{ marginTop: "3px" }}>Or</Typography>
                   <Grid item xs>
-                    <Divider variant="middle" style={{ marginTop: "60px" }} />
+                    <Divider variant="middle" style={{ marginTop: "20px" }} />
                   </Grid>
                 </Grid>
 
@@ -200,16 +180,25 @@ export default function LogInForm() {
                     </div>
                   </Grid>
                 </Grid>
-                <Box mt={5}>
+                <Box mt={2}>
                   <Copyright />
                 </Box>
-                {/* </form> */}
               </Controls.Form>
             </div>
           </Grid>
-          <Grid item xs={false} sm={4} md={7} className={classes.image} />
+          <Grid item xs={false} sm={4} md={7} className={classes.image}>
+            {/* <Typography
+              variant="h5"
+              align="center"
+              wrap
+              style={{ color: "#fff" }}
+            >
+              Now finding a cook to get your food on time is easy, just in
+              cliks you can get maid around your location
+            </Typography> */}
+          </Grid>
         </Grid>
       </Card>
-    </>
+    </div>
   );
 }

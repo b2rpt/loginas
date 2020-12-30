@@ -5,32 +5,17 @@ import { NavLink } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import { Controls } from "../../components/controls/controls";
 import HeaderNlogo from "../pages/headerNlogo";
+import { addCookDetails } from "../../services/addCookDetails";
 
 const useStyle = makeStyles((theme) => ({
-  root: {
-    height: "50vh",
-    width: "150vh",
-  },
   Paper: {
-    margin: "20px 70px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  image: {
-    backgroundImage: "url(https://source.unsplash.com/1600x900/?cook)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    // margin: "20px 70px",
+    // flexDirection: "column",
+    // alignItems: "center",
   },
 }));
 
 const initialValues = {
-  id: 0,
   fullName: "",
   email: "",
   mobile: "",
@@ -39,9 +24,10 @@ const initialValues = {
   pincode: "",
   gender: "male",
   hiredate: new Date(),
-  specialist: "",
+  specialist: "NorthIndian",
   experience: "",
-  age: "",
+  address: "",
+  location: "",
 };
 
 const genderItmes = [
@@ -60,124 +46,137 @@ export default function AddMembers(props) {
     console.log("props->", props);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log("hi", values);
+    addCookDetails(values);
+  };
+
   return (
     <>
-      <Card style={{padding:'20px'}}>
-        <HeaderNlogo />
-        <Grid container component="main" className={classes.root}>
-          <Grid item xs={6}>
-            <div className={classes.Paper}>
-              <Controls.Form>
-                <Controls.Input
-                  type="text"
-                  label="Full Name"
-                  value={values.fullName}
-                  name="fullName"
-                  onChange={handleChange}
-                  id="fullName"
-                  autoComplete="name"
-                  // autoFocus={true}
-                />
-                <Controls.Input
-                  type="email"
-                  value={values.email}
-                  name="email"
-                  margin="normal"
-                  label="Email"
-                  onChange={handleChange}
-                  autoComplete="email"
-                />
+      <div className="App-headerforPages" style={{ padding: "60px" }}>
+        <Card style={{ padding: "20px" }}>
+          <HeaderNlogo />
+          <Controls.Form onSubmit={handleSubmit}>
+            <Grid container component="main">
+              <Grid item xs={6} style={{ width: "100vh" }}>
+                <div className={classes.Paper}>
+                  <Controls.Input
+                    type="text"
+                    label="Full Name"
+                    value={values.fullName}
+                    name="fullName"
+                    onChange={handleChange}
+                    id="fullName"
+                    autoComplete="name"
+                    // autoFocus={true}
+                  />
+                  <Controls.Input
+                    type="email"
+                    value={values.email}
+                    name="email"
+                    margin="normal"
+                    label="Email"
+                    onChange={handleChange}
+                    autoComplete="email"
+                  />
 
-                <Controls.Input
-                  type="phone"
-                  value={values.mobile}
-                  name="mobile"
-                  margin="normal"
-                  label="mobile"
-                  onChange={handleChange}
-                />
+                  <Controls.Input
+                    type="phone"
+                    value={values.mobile}
+                    name="mobile"
+                    margin="normal"
+                    label="mobile"
+                    onChange={handleChange}
+                  />
 
-                <Controls.Input
-                  type="number"
-                  value={values.experience}
-                  name="experience"
-                  margin="normal"
-                  label="experience"
-                  onChange={handleChange}
-                  autoComplete={true}
-                />
-                <Controls.Input
-                  type="number"
-                  value={values.age}
-                  name="age"
-                  margin="normal"
-                  label="age"
-                  onChange={handleChange}
-                  autoComplete={true}
-                />
-              </Controls.Form>
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <span className={classes.Paper}>
-              <Controls.Input
-                type="text"
-                value={values.state}
-                name="state"
-                margin="normal"
-                label="state"
-                onChange={handleChange}
-                autoComplete={true}
-              />
-              <Controls.Input
-                type="text"
-                value={values.city}
-                name="city"
-                margin="normal"
-                label="city"
-                onChange={handleChange}
-                autoComplete={true}
-              />
-              <Controls.Input
-                type="number"
-                value={values.pincode}
-                name="pincode"
-                margin="normal"
-                label="pincode"
-                onChange={handleChange}
-                autoComplete={true}
-              />
-              <Grid container>
-                <Grid item style={{ marginTop: "5px" }}>
+                  <Controls.Input
+                    type="number"
+                    value={values.experience}
+                    name="experience"
+                    margin="normal"
+                    label="experience"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+                  <Controls.GroupedSelect
+                    label="specialistIN"
+                    value={values.specialist}
+                    name="specialist"
+                    onChange={handleChange}
+                  ></Controls.GroupedSelect>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <span className={classes.Paper}>
+                  <Controls.Input
+                    type="address"
+                    value={values.address}
+                    name="address"
+                    margin="normal"
+                    label="address"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+                  <Controls.Input
+                    type="text"
+                    value={values.city}
+                    name="city"
+                    margin="normal"
+                    label="city"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+                  <Controls.Input
+                    type="text"
+                    value={values.state}
+                    name="state"
+                    margin="normal"
+                    label="state"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+
+                  <Controls.Input
+                    type="address"
+                    value={values.location}
+                    name="location"
+                    margin="normal"
+                    label="location"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+                  <Controls.Input
+                    type="number"
+                    value={values.pincode}
+                    name="pincode"
+                    margin="normal"
+                    label="pincode"
+                    onChange={handleChange}
+                    autoComplete={true}
+                  />
+
                   <Controls.RadioGroup
+                    row="row"
                     name="gender"
                     value={values.gender}
                     onChange={handleChange}
                     items={genderItmes}
-                    label="Gender"
+                    // label="Gender"
                   />
-                </Grid>
-                <Grid item></Grid>
-                <Controls.GroupedSelect />
+                </span>
               </Grid>
-            </span>
-          </Grid>
-        </Grid>
-        <div>
-          <Controls.Button label="SUBMIT DETAILS" type="submit" size='large' />
-          {/* <Typography variant="body2">
-            <NavLink
-              to="/signin"
-              exact
-              style={{ textDecoration: "none" }}
-              activeClassName="activeSignUp"
-              activeStyle={{ color: "orange", textDecoration: "underline" }}
-            >
-              Already have an account? Sign In
-            </NavLink>
-          </Typography> */}
-        </div>
-      </Card>
+            </Grid>
+            <div>
+              <Controls.Button
+                label="SUBMIT DETAILS"
+                type="submit"
+                size="large"
+              />
+            </div>
+          </Controls.Form>
+        </Card>
+      </div>
     </>
   );
 }

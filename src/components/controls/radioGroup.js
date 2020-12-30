@@ -18,15 +18,12 @@ const useStyle = makeStyles((theme) => ({
 
 export default function RadioGroup(props) {
   const classes = useStyle();
-  const { label, name, value, onChange, items } = props;
+  const { label, name, value, onChange, items, row } = props;
 
   return (
-    <FormControl className={classes.radio}>
-      <MuiRadioGroup  name={name} value={value} onChange={onChange}>
-        <FormLabel>
-          {/* <FormLabel style={{ padding: "12px", margin: "24px 0 0 -105px" }}> */}
-          {label}
-        </FormLabel>
+    <FormControl>
+      <FormLabel>{label}</FormLabel>
+      <MuiRadioGroup name={name} value={value} onChange={onChange} row>
         {items.map((m, index) => (
           <FormControlLabel value={m.id} control={<Radio />} label={m.title} />
         ))}

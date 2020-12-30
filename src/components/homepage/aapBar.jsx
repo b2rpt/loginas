@@ -11,6 +11,8 @@ import SearchIcon from '@material-ui/icons/Search';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width:"100%",
+    height:"8vh"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -30,17 +32,18 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:"#020C53"}}>
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            style={{color:"#FFCA3D"}}
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap style={{color:"#FFCA3D", fontFamily:"Montserrat"}}>
             maidIN
           </Typography>
         </Toolbar>

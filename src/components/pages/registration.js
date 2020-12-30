@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
-import { Card, Grid, makeStyles, Link, Typography } from "@material-ui/core";
+import {
+  Card,
+  Grid,
+  makeStyles,
+  Link,
+  Typography,
+  Paper,
+} from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 import { Controls } from "../../components/controls/controls";
 import HeaderNlogo from "../pages/headerNlogo";
+import { registerUser } from "../../services/registration";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -26,28 +34,16 @@ const useStyle = makeStyles((theme) => ({
         : theme.palette.grey[900],
     backgroundSize: "cover",
     backgroundPosition: "center",
+    opacity: ".5",
   },
 }));
 
 const initialValues = {
-  id: 0,
   fullName: "",
   email: "",
   password: "",
   confirmPassword: "",
-  mobile: "",
-  city: "",
-  gender: "male",
-  hiredate: new Date(),
-  specialist: "",
-  experience: "",
 };
-
-const genderItmes = [
-  { id: "male", title: "Male" },
-  { id: "female", title: "Female" },
-  { id: "other", title: "Other" },
-];
 
 export default function RegistrationForm(props) {
   const classes = useStyle();
@@ -59,23 +55,32 @@ export default function RegistrationForm(props) {
     console.log("props->", props);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (values.password !== values.confirmPassword) {
+      window.alert("Password did not matched, try again! ");
+    } else {
+      console.log("hi", values);
+      registerUser(values.fullName, values.email, values.password);
+    }
+  };
   return (
-    <>
+    <div className="App-headerforPages">
       <Card>
-        <Grid container component="main">
+        <Grid container component="main" style={{ backgroundColor: "#020C53" }}>
           <Grid
             item
             xs={12}
             sm={8}
             md={5}
-            // component={Paper}
+            component={Paper}
             elevation={6}
             square
             className={classes.root}
           >
             <div className={classes.Paper}>
               <HeaderNlogo />
-              <Controls.Form>
+              <Controls.Form onSubmit={handleSubmit}>
                 <Controls.Input
                   type="text"
                   label="Full Name"
@@ -118,7 +123,7 @@ export default function RegistrationForm(props) {
                                     onChange={handleChange}
                                     items={genderItmes}
                                 /> */}
-                <Controls.Button label="SIGN UP" type="submit" fullWidth/>
+                <Controls.Button label="SIGN UP" type="submit" fullWidth />
               </Controls.Form>
             </div>
             <div>
@@ -138,6 +143,6 @@ export default function RegistrationForm(props) {
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
         </Grid>
       </Card>
-    </>
+    </div>
   );
 }

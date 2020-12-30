@@ -1,21 +1,22 @@
 import axios from "axios";
-import config from "../config";
+import confg from "../config";
 
-const validateLogin = async (email, password) => {
-  const url = config.baseUrl + config.loginUrl;
+const registerUser = async (fullName, email, password) => {
+  const url = confg.baseUrl + confg.registerUserUrl;
   let body = {
+    userName: fullName,
     email: email,
     password: password,
+    isAdmin: false
   };
   try {
     return await axios
       .post(url, body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
       .then((responce) => {
+        console.log(responce);
         return responce;
       });
   } catch (err) {
@@ -23,4 +24,4 @@ const validateLogin = async (email, password) => {
   }
 };
 
-export { validateLogin };
+export { registerUser };

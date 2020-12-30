@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Card, Grid, makeStyles, Typography, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
@@ -26,6 +26,7 @@ const useStyle = makeStyles((theme) => ({
         : theme.palette.grey[900],
     backgroundSize: "cover",
     backgroundPosition: "center",
+    opacity: ".5",
   },
 }));
 
@@ -44,22 +45,22 @@ export default function ForgotPassword(props) {
   }, []);
 
   return (
-    <>
+    <div className="App-headerforPages">
       <Card>
-        <Grid container component="main">
+        <Grid container component="main" style={{ backgroundColor: "#020C53" }}>
           <Grid
             item
             xs={12}
             sm={8}
             md={5}
-            // component={Paper}
+            component={Paper}
             elevation={6}
             square
             className={classes.root}
           >
             <div className={classes.Paper}>
               <HeaderNlogo />
-              <span style={{marginTop:'100px'}}>
+              <span style={{ marginTop: "5%" }}>
                 <Controls.Form style={{ marginTop: "100px" }}>
                   <Controls.Input
                     type="email"
@@ -70,12 +71,16 @@ export default function ForgotPassword(props) {
                     onChange={handleChange}
                     autoComplete="email"
                   />
-                  <Controls.Button label="RESET PASSWORD" type="submit" fullWidth />
+                  <Controls.Button
+                    label="RESET PASSWORD"
+                    type="submit"
+                    fullWidth
+                  />
                 </Controls.Form>
               </span>
             </div>
 
-            <div style={{marginTop:'150px'}}>
+            <div style={{ marginTop: "100px" }}>
               <Typography variant="body2">
                 <NavLink
                   to="/signin"
@@ -92,6 +97,6 @@ export default function ForgotPassword(props) {
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
         </Grid>
       </Card>
-    </>
+    </div>
   );
 }
